@@ -936,11 +936,11 @@ section,
   font-weight: 700;
 }
 
-.about img {
+/* .about img {
   width: 100%;
   border-radius: 10px;
   padding-left: 50px;
-}
+} */
 
 .about .content .fst-italic {
   color: color-mix(in srgb, var(--default-color), var(--contrast-color) 50%);
