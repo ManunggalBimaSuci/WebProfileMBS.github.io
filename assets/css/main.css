@@ -1024,6 +1024,11 @@ section,
   font-weight: 700;
   margin: 0 0 5px 0;
 }
+.features .features-item h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+}
 
 .features .features-item i {
   font-size: 48px;
@@ -1418,7 +1423,7 @@ section,
   overflow: hidden;
 }
 
-.team .team-member .social {
+/* .team .team-member .social {
   position: absolute;
   left: 0;
   bottom: 30px;
@@ -1449,7 +1454,7 @@ section,
 .team .team-member .social i {
   font-size: 18px;
   line-height: 0;
-}
+} */
 
 .team .team-member .member-info {
   padding: 25px 15px;
