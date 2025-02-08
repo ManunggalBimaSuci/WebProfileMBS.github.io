@@ -130,38 +130,48 @@
     selector: '.glightbox'
   });
 
-  /**
-   * Init isotope layout and filters
-   */
-  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
-    let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
-    let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
-    let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
+/**
+ * Init isotope layout and filters
+ */
+document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
+  let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
+  let defaultFilter = isotopeItem.querySelector('.filter-active')?.getAttribute('data-filter') ?? '.filter-sosial'; // Ambil filter default dari HTML
+  let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
 
-    let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
-      initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
-        itemSelector: '.isotope-item',
-        layoutMode: layout,
-        filter: filter,
-        sortBy: sort
-      });
+  let initIsotope;
+
+  // Pastikan gambar telah dimuat sebelum inisialisasi Isotope
+  imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
+    initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
+      itemSelector: '.isotope-item',
+      layoutMode: layout,
+      sortBy: sort
     });
 
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-      filters.addEventListener('click', function() {
-        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
-        this.classList.add('filter-active');
-        initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        if (typeof aosInit === 'function') {
-          aosInit();
-        }
-      }, false);
-    });
+    // **🔥 Terapkan filter default setelah Isotope siap**
+    setTimeout(() => {
+      initIsotope.arrange({ filter: defaultFilter });
 
+      console.log("Filter default diterapkan:", defaultFilter);
+    }, 100); // Delay kecil untuk memastikan Isotope siap
   });
+
+  // Event Listener untuk tombol filter
+  isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
+    filters.addEventListener('click', function() {
+      isotopeItem.querySelector('.isotope-filters .filter-active')?.classList.remove('filter-active');
+      this.classList.add('filter-active');
+      initIsotope.arrange({
+        filter: this.getAttribute('data-filter')
+      });
+      if (typeof aosInit === 'function') {
+        aosInit();
+      }
+    }, false);
+  });
+
+});
+
 
   /**
    * Initiate Pure Counter
