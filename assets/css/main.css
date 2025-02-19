@@ -936,12 +936,6 @@ section,
   font-weight: 700;
 }
 
-/* .about img {
-  width: 100%;
-  border-radius: 10px;
-  padding-left: 50px;
-} */
-
 .about .content .fst-italic {
   color: color-mix(in srgb, var(--default-color), var(--contrast-color) 50%);
 }
@@ -1042,6 +1036,19 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 20%);
   margin: 0;
 }
+
+@media (max-width: 575px) {
+  .features .features-image {
+    min-height: auto;
+  }
+
+  .features .features-image img {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Services Section
